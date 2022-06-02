@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="63dp"
+        android:layout_height="86dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/egg" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="당신을 위한 모든 레시피"
+        app:layout_constraintTop_toBottomOf="@id/logo"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Every-Recipe"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/textView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <EditText
+
+        android:id="@+id/ID"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:hint="ID"
+        app:layout_constraintTop_toBottomOf="@id/textView2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="130dp"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <EditText
+        android:id="@+id/PW"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:hint="P/W"
+        app:layout_constraintTop_toBottomOf="@id/ID"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="20dp"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <Button
+        android:id="@+id/button_join"
+        android:layout_width="91dp"
+        android:layout_height="41dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="#F6E29A"
+        android:text="회원가입"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/PW"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/button_login"
+        />
+
+    <Button
+        android:id="@+id/button_login"
+        android:layout_width="91dp"
+        android:layout_height="41dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="#F6E29A"
+        android:text="로그인"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/PW"
+        app:layout_constraintLeft_toRightOf="@id/button_join"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Material">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/material_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/textCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20dp"
+            android:text="취소"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/MaterialTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="재료 추가하기"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/textRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="20dp"
+            android:text="등록"
+            android:textColor="@color/black" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/imageMaterial"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/material_toolbar"
+        app:srcCompat="@drawable/material_pic" />
+
+    <TextView
+        android:id="@+id/materialName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:text="이름"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageMaterial" />
+    <EditText
+        android:id="@+id/edit_materialName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="이름을 입력하세요"
+        android:background="@null"
+        android:textSize="15dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintLeft_toRightOf="@id/materialName"
+        app:layout_constraintTop_toBottomOf="@id/imageMaterial"/>
+
+    <TextView
+        android:id="@+id/materialDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:text="구매 날짜"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/materialName" />
+
+    <TextView
+        android:id="@+id/dateInsert"
+        android:layout_width="180dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="20dp"
+        android:text=""
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toRightOf="@id/materialDate"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/materialName" />
+    <Button
+        android:id="@+id/button_date"
+        android:layout_width="100dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#F6E29A"
+        android:text="날짜 선택"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toRightOf="@id/dateInsert"
+        app:layout_constraintTop_toBottomOf="@id/materialName" />
+
+    <TextView
+        android:id="@+id/materialDate2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:text="유통기한"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dateInsert" />
+
+    <TextView
+        android:id="@+id/dateInsert2"
+        android:layout_width="180dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:text=""
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toRightOf="@id/materialDate2"
+        app:layout_constraintTop_toBottomOf="@id/dateInsert" />
+    <Button
+        android:id="@+id/button_date2"
+        android:layout_width="100dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="5dp"
+        android:backgroundTint="#F6E29A"
+        android:text="날짜 선택"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toRightOf="@id/dateInsert2"
+        app:layout_constraintTop_toBottomOf="@id/dateInsert"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

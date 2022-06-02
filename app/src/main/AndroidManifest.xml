@@ -14,8 +14,51 @@
         android:theme="@style/Theme.MyEveryRecipe"
         tools:targetApi="31">
         <activity
+            android:name=".Writing"
+            android:exported="false" />
+        <activity
+            android:name=".Material"
+            android:exported="false" />
+        <activity
+            android:name=".Salad"
+            android:exported="false" />
+        <activity
+            android:name=".Sandwich"
+            android:exported="false" />
+        <activity
+            android:name=".Pasta"
+            android:exported="false" />
+        <activity
+            android:name=".Korean"
+            android:exported="false" />
+        <activity
+            android:name=".Search"
+            android:exported="false" />
+        <activity
+            android:name=".MyPage"
+            android:exported="false" />
+        <activity
+            android:name=".MyRecipe"
+            android:exported="false" />
+        <activity
+            android:name=".Refrigerator"
+            android:exported="false" />
+        <activity
+            android:name=".Join"
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Login"
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Splash"
+            android:exported="true"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

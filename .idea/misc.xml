@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/minyeong/Desktop/teamnova/MyEveryRecipe/app/src/main/res/drawable-v24/ic_baseline_keyboard_arrow_left_24.xml" value="0.1965" />
+        <entry key="..\:/Users/minyeong/Desktop/teamnova/MyEveryRecipe/app/src/main/res/layout/activity_join.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/minyeong/Desktop/teamnova/MyEveryRecipe/app/src/main/res/layout/activity_korean.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/minyeong/Desktop/teamnova/MyEveryRecipe/app/src/main/res/layout/activity_login.xml" value="0.35208333333333336" />
+        <entry key="..\:/Users/minyeong/Desktop/teamnova/MyEveryRecipe/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/minyeong/Desktop/teamnova/MyEveryRecipe/app/src/main/res/layout/activity_material.xml" value="0.35208333333333336" />
+        <entry key="..\:/Users/minyeong/Desktop/teamnova/MyEveryRecipe/app/src/main/res/layout/activity_my_page.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/minyeong/Desktop/teamnova/MyEveryRecipe/app/src/main/res/layout/activity_my_recipe.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/minyeong/Desktop/teamnova/MyEveryRecipe/app/src/main/res/layout/activity_pasta.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/minyeong/Desktop/teamnova/MyEveryRecipe/app/src/main/res/layout/activity_refrigerator.xml" value="0.35208333333333336" />
+        <entry key="..\:/Users/minyeong/Desktop/teamnova/MyEveryRecipe/app/src/main/res/layout/activity_salad.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/minyeong/Desktop/teamnova/MyEveryRecipe/app/src/main/res/layout/activity_sandwich.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/minyeong/Desktop/teamnova/MyEveryRecipe/app/src/main/res/layout/activity_search.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/minyeong/Desktop/teamnova/MyEveryRecipe/app/src/main/res/layout/activity_splash.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/minyeong/Desktop/teamnova/MyEveryRecipe/app/src/main/res/layout/activity_writing.xml" value="0.35208333333333336" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
