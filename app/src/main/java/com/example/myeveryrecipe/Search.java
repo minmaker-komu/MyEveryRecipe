@@ -37,7 +37,9 @@ public class Search extends AppCompatActivity {
 
                 Toast.makeText(Search.this, "검색결과 : "+query, Toast.LENGTH_SHORT).show();
                 //searchWeb(query);
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com/search?q="+query));
+                //Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com/search?q="+query));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://m.blog.naver.com/SectionPostSearch.naver?orderType=sim&searchValue="+query+" 요리"));
                 startActivity(browserIntent);
 
 
@@ -46,7 +48,7 @@ public class Search extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                Toast.makeText(Search.this, "검색중 : "+newText , Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Search.this, "검색중 : "+newText , Toast.LENGTH_SHORT).show();
                 return true;
             }
         });

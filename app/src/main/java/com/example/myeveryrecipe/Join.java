@@ -36,14 +36,14 @@ public class Join extends AppCompatActivity {
         //getSharedPreferences("파일이름",'모드')
         //모드 => 0 (읽기,쓰기가능)
         //모드 => MODE_PRIVATE (이 앱에서만 사용가능)
-        sharedPreferences = getSharedPreferences("UserInfo", MODE_PRIVATE);
+        //sharedPreferences = getSharedPreferences("UserInfo", MODE_PRIVATE);
 
         // 회원가입 완료 버튼
         JoinComplete = findViewById(R.id.button_join_Complete);
         JoinComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sharedPreferences = getSharedPreferences("Myinfo",MODE_PRIVATE);
+                sharedPreferences = getSharedPreferences("UserInfo",MODE_PRIVATE);
                 String name = Name.getText().toString();
                 String id = ID_insert.getText().toString();
                 String pw = PW_insert.getText().toString();

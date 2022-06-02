@@ -18,7 +18,7 @@ public class MyPage extends AppCompatActivity {
     ImageView refri;
     ImageView recipe;
     ImageView mypage;
-    SharedPreferences sharedPreferences = getSharedPreferences("Myinfo", MODE_PRIVATE);
+
 
     private Context mContext;
 
@@ -40,6 +40,7 @@ public class MyPage extends AppCompatActivity {
 //        System.out.println(name);
 
         //String checkName = PreferenceManager.getString(mContext, "name");
+        SharedPreferences sharedPreferences = getSharedPreferences("UserInfo", MODE_PRIVATE);
         String name = sharedPreferences.getString("name","");
         nickname = findViewById(R.id.nickname);
         nickname.setText(name);
