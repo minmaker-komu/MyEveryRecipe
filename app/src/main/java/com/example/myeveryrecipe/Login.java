@@ -63,12 +63,6 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                /*Toast.makeText(Login.this, "로그인이 완료되었습니다.", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                intent.putExtra("id",id);
-                intent.putExtra("pw",pw);
-                //intent.putExtra("name",name);
-                startActivity(intent);*/
 
                 if (TextUtils.isEmpty(ID.getText()) || TextUtils.isEmpty(PW.getText())){
                     //아이디나 암호 둘 중 하나가 비어있으면 토스트메시지를 띄운다
@@ -77,9 +71,6 @@ public class Login extends AppCompatActivity {
                 }else { //둘 다 충족하면 다음 동작을 구현해놓음
                     Toast.makeText(Login.this, "로그인이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                    //intent.putExtra("id",id);
-                    //intent.putExtra("pw",pw);
-                    //intent.putExtra("name",name);
                     startActivity(intent);
                 }
             }

@@ -3,6 +3,7 @@ package com.example.myeveryrecipe;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -65,6 +66,21 @@ public class MyRecipeAdapter extends RecyclerView.Adapter<MyRecipeAdapter.ItemVi
 
         ItemViewHolder(View itemView) {
             super(itemView);
+            // 누르면 읽기 겸 수정
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    MyRecipeData recipeData = mData.get(position);
+                    Intent intent = new Intent(view.getContext(),ReadMyRecipe.class);
+                    intent.putExtra("title", recipeData.getRecipe_name());
+                    intent.putExtra("food",recipeData.getRecipe_food());
+                    intent.putExtra("img1",recipeData.getRecipe_image());
+                    intent.putExtra("position", position);
+
+                    view.getContext().startActivity(intent);
+                }
+            });
 
             // 길게 누르면 삭제하기
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -99,6 +115,7 @@ public class MyRecipeAdapter extends RecyclerView.Adapter<MyRecipeAdapter.ItemVi
             select_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     System.out.println("%%%1212");
                 }
             });

@@ -15,6 +15,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,7 +30,7 @@ public class Refrigerator extends AppCompatActivity {
     ImageView recipe;
     ImageView mypage;
 
-    ImageView threebtn;
+    FloatingActionButton material_add;
 
     ArrayList<MaterialData> materialData;
 
@@ -42,6 +44,15 @@ public class Refrigerator extends AppCompatActivity {
         refri = findViewById(R.id.menu_refri);
         recipe = findViewById(R.id.menu_writing);
         mypage = findViewById(R.id.menu_profile);
+
+        material_add = findViewById(R.id.refrigerator);
+        material_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),Material.class);
+                startActivity(intent);
+            }
+        });
 
         // 홈
         cook.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +98,16 @@ public class Refrigerator extends AppCompatActivity {
         ListView listView = (ListView)findViewById(R.id.listview);
         final MaterialAdapter materialAdapter = new MaterialAdapter(this,materialData);
         listView.setAdapter(materialAdapter);
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                //materialAdapter.getItem(position).getMaterial_name();
+                Intent intent = new Intent(getApplicationContext(), ReadMaterial.class);
+                startActivity(intent);
+            }
+        });
 
         // 길게 클릭했을 때 삭제하기
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {

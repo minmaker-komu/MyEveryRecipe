@@ -84,6 +84,9 @@ public class MyRecipe extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.myRecipe_recyclerview);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        ((LinearLayoutManager) linearLayoutManager).setReverseLayout(true);
+        ((LinearLayoutManager) linearLayoutManager).setStackFromEnd(true);
+
         recyclerView.setLayoutManager(linearLayoutManager);
 
         adapter = new MyRecipeAdapter(mList);
