@@ -70,7 +70,7 @@ public class Login extends AppCompatActivity {
                 //intent.putExtra("name",name);
                 startActivity(intent);*/
 
-                if (TextUtils.isEmpty(id) || TextUtils.isEmpty(pw)){
+                if (TextUtils.isEmpty(ID.getText()) || TextUtils.isEmpty(PW.getText())){
                     //아이디나 암호 둘 중 하나가 비어있으면 토스트메시지를 띄운다
                     Toast.makeText(Login.this, "아이디/암호를 입력해주세요",
                             Toast.LENGTH_SHORT).show();

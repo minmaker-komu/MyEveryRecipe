@@ -1,19 +1,36 @@
 package com.example.myeveryrecipe;
 
-import androidx.appcompat.app.AppCompatActivity;
 
+
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class Refrigerator extends AppCompatActivity {
+    TextView date;
 
     // 메뉴 선택 이미지
     ImageView cook;
     ImageView refri;
     ImageView recipe;
     ImageView mypage;
+
+    ImageView threebtn;
+
+    ArrayList<MaterialData> materialData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,5 +75,49 @@ public class Refrigerator extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // 현재 날짜
+        date = findViewById(R.id.textDate);
+        date.setText(getTime());
+
+        // 초기에 보여질 재료들
+        this.InitializeMaterialData();
+
+        // 리스트뷰 보이게
+        ListView listView = (ListView)findViewById(R.id.listview);
+        final MaterialAdapter materialAdapter = new MaterialAdapter(this,materialData);
+        listView.setAdapter(materialAdapter);
+
+        // 길게 클릭했을 때 삭제하기
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Refrigerator.this);
+                builder.setTitle("재료 삭제하기")
+                        .setMessage(materialData.get(position).getMaterial_name() + "을(를) 삭제하시겠습니까?")
+                        .setPositiveButton("삭제하기", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                materialData.remove(position);
+                                materialAdapter.notifyDataSetChanged();
+                            }
+                        })
+                        .setNeutralButton("취소", null).show();
+                return false;
+            }
+        });
+    }
+
+    public void InitializeMaterialData()
+    {
+        materialData = new ArrayList<MaterialData>();
+
+        materialData.add(new MaterialData(R.drawable.bread, "빵","22.05.06","23.09.11","2"));
+    }
+
+    private String getTime() { long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String getTime = dateFormat.format(date); return getTime;
     }
 }

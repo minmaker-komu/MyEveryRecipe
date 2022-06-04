@@ -73,6 +73,14 @@
                 android:textSize="20dp"/>
         </TableRow>
     </TableLayout>
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="400dp"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/table" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

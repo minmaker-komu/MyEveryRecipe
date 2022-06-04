@@ -1,11 +1,17 @@
 package com.example.myeveryrecipe;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
 
 public class MyRecipe extends AppCompatActivity {
 
@@ -14,6 +20,11 @@ public class MyRecipe extends AppCompatActivity {
     ImageView refri;
     ImageView recipe;
     ImageView mypage;
+
+    FloatingActionButton btn;
+
+    MyRecipeAdapter adapter;
+    ArrayList<MyRecipeData> mList = new ArrayList<MyRecipeData>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,5 +70,39 @@ public class MyRecipe extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btn = findViewById(R.id.recipe_btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),Writing.class);
+                startActivity(intent);
+            }
+        });
+
+        // 리사이클러뷰
+        RecyclerView recyclerView = findViewById(R.id.myRecipe_recyclerview);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        adapter = new MyRecipeAdapter(mList);
+        recyclerView.setAdapter(adapter);
+        System.out.println("$$$$");
+
+        // 아이템 추가.
+        addItem(R.drawable.gamberoni,"감베로니","양식");
+        System.out.println("&&");
+        // 두 번째 아이템 추가.
+        addItem(R.drawable.susi, "연어초밥","기타");
+        // 세 번째 아이템 추가.
+        addItem(R.drawable.oilpasta, "삼겹살 파스타","양식");
+        adapter.notifyDataSetChanged();
+    }
+
+    public void addItem(int recipe_image, String recipe_title, String recipe_food) {
+        MyRecipeData item = new MyRecipeData(recipe_image,recipe_title,recipe_food);
+        mList.add(item);
+        System.out.println("%%%%");
     }
 }
