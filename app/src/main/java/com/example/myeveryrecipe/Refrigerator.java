@@ -29,6 +29,7 @@ public class Refrigerator extends AppCompatActivity {
     ImageView refri;
     ImageView recipe;
     ImageView mypage;
+    MaterialAdapter materialAdapter;
 
     FloatingActionButton material_add;
 
@@ -38,6 +39,7 @@ public class Refrigerator extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_refrigerator);
+
 
         // 정의
         cook = findViewById(R.id.menu_cook);
@@ -96,15 +98,24 @@ public class Refrigerator extends AppCompatActivity {
 
         // 리스트뷰 보이게
         ListView listView = (ListView)findViewById(R.id.listview);
-        final MaterialAdapter materialAdapter = new MaterialAdapter(this,materialData);
+        materialAdapter = new MaterialAdapter(this,materialData);
         listView.setAdapter(materialAdapter);
 
-
+        // 재료 확인하기
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 //materialAdapter.getItem(position).getMaterial_name();
+                int itemPosition = listView.getCheckedItemPosition();
+
+                MaterialData material = materialData.get(itemPosition+1);
                 Intent intent = new Intent(getApplicationContext(), ReadMaterial.class);
+                intent.putExtra("material_name", material.getMaterial_name());
+                intent.putExtra("material_date", material.getMaterial_date());
+                intent.putExtra("material_due", material.getMaterial_due());
+                intent.putExtra("material_num", material.getMaterial_num());
+                intent.putExtra("material_img", material.getMaterial_image());
+                intent.putExtra("position", position);
                 startActivity(intent);
             }
         });
@@ -140,5 +151,33 @@ public class Refrigerator extends AppCompatActivity {
         Date date = new Date(now);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String getTime = dateFormat.format(date); return getTime;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        int action = 0;
+        //if (getIntent().getBooleanExtra("new", false)) action = 1;
+        if (getIntent().getBooleanExtra("edit", false)) action = 2;
+        if (action > 0) {
+            System.out.println("^^^^^");
+            String name_update = getIntent().getStringExtra("name_update");
+            String date_update = getIntent().getStringExtra("date_update");
+            String date2_update = getIntent().getStringExtra("date2_update");
+            System.out.println(name_update);
+            int position = getIntent().getIntExtra("position", -1);
+            System.out.println(position);
+            System.out.println("%%%");
+
+            if (position != -1) {
+                System.out.println("####");
+                materialData.get(position).setMaterial_name(name_update);
+                materialData.get(position).setMaterial_date(date_update);
+                materialData.get(position).setMaterial_due(date2_update);
+            }
+            materialAdapter.notifyDataSetChanged();
+
+        }
+
     }
 }

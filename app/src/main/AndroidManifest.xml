@@ -14,13 +14,17 @@
         android:theme="@style/Theme.MyEveryRecipe"
         tools:targetApi="31">
         <activity
-            android:name=".ReadMaterial"
+            android:name=".ReadRecipe"
             android:exported="false"
             android:theme="@style/AppTheme"/>
         <activity
+            android:name=".ReadMaterial"
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".ReadMyRecipe"
             android:exported="false"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".Scrap"
             android:exported="false"

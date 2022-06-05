@@ -30,7 +30,7 @@ public class Sandwich extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // 아이템 추가
-        addItem(R.drawable.sandwich2, "딸기 와플","간식");
+        addItem(R.drawable.sandwich2, "딸기 와플","간식","","");
 
 
         mAdapter.notifyDataSetChanged() ;
@@ -45,13 +45,9 @@ public class Sandwich extends AppCompatActivity {
             }
         });
     }
-    public void addItem(int recipe_image, String recipe_title, String recipe_food) {
-        MyRecipeData item = new MyRecipeData(recipe_image,recipe_title,recipe_food);
-
-        item.setRecipe_image(recipe_image);
-        item.setRecipe_name(recipe_title);
-        item.setRecipe_food(recipe_food);
-
+    public void addItem(int recipe_image, String recipe_title, String recipe_food, String recipe_need, String recipe_context) {
+        MyRecipeData item = new MyRecipeData(recipe_image,recipe_title,recipe_food,recipe_need, recipe_context);
         mList.add(item);
+        System.out.println("%%%%");
     }
 }

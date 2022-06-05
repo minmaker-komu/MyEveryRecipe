@@ -76,6 +76,8 @@ public class MyRecipeAdapter extends RecyclerView.Adapter<MyRecipeAdapter.ItemVi
                     intent.putExtra("title", recipeData.getRecipe_name());
                     intent.putExtra("food",recipeData.getRecipe_food());
                     intent.putExtra("img1",recipeData.getRecipe_image());
+                    intent.putExtra("need",recipeData.getRecipe_need());
+                    intent.putExtra("recipe",recipeData.getRecipe_context());
                     intent.putExtra("position", position);
 
                     view.getContext().startActivity(intent);

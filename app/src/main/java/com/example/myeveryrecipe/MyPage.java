@@ -50,10 +50,10 @@ public class MyPage extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false));
 
-        addItem(R.drawable.susi, "연어초밥","기타");
-        addItem(R.drawable.oilpasta, "파스타","양식");
-        addItem(R.drawable.pasta2, "새우 베이컨 파스타","양식");
-        addItem(R.drawable.pasta3, "토마토 파스타","양식");
+        addItem(R.drawable.susi, "연어초밥","기타","","");
+        addItem(R.drawable.oilpasta, "파스타","양식","","");
+        addItem(R.drawable.pasta2, "새우 베이컨 파스타","양식","","");
+        addItem(R.drawable.pasta3, "토마토 파스타","양식","","");
 
         mAdapter.notifyDataSetChanged() ;
 
@@ -111,13 +111,9 @@ public class MyPage extends AppCompatActivity {
         });
 
     }
-    public void addItem(int recipe_image, String recipe_title, String recipe_food) {
-        MyRecipeData item = new MyRecipeData(recipe_image,recipe_title,recipe_food);
-
-        item.setRecipe_image(recipe_image);
-        item.setRecipe_name(recipe_title);
-        item.setRecipe_food(recipe_food);
-
+    public void addItem(int recipe_image, String recipe_title, String recipe_food, String recipe_need, String recipe_context) {
+        MyRecipeData item = new MyRecipeData(recipe_image,recipe_title,recipe_food,recipe_need, recipe_context);
         mList.add(item);
+        System.out.println("%%%%");
     }
 }

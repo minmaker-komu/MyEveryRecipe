@@ -75,6 +75,15 @@ public class RecyclerRecipeAdapter extends RecyclerView.Adapter<RecyclerRecipeAd
 
                     int position = getAdapterPosition();
                     MyRecipeData recipeData = mData.get(position);
+                    Intent intent = new Intent(view.getContext(),ReadRecipe.class);
+                    intent.putExtra("title", recipeData.getRecipe_name());
+                    intent.putExtra("food",recipeData.getRecipe_food());
+                    intent.putExtra("img2",recipeData.getRecipe_image());
+                    intent.putExtra("need",recipeData.getRecipe_need());
+                    intent.putExtra("recipe",recipeData.getRecipe_context());
+                    intent.putExtra("position", position);
+
+                    view.getContext().startActivity(intent);
 
                     /*Intent intent = new Intent(view.getContext(),ReadRecipe.class);
                     intent.putExtra("title", recipeData.getRecipe_name());
@@ -97,6 +106,7 @@ public class RecyclerRecipeAdapter extends RecyclerView.Adapter<RecyclerRecipeAd
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     // 스크랩
                                     System.out.println("###스크랩###");
+                                    Toast.makeText(itemView.getContext(),"스크랩이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                                 }
                             })
                             .setNeutralButton("취소", null)

@@ -30,11 +30,11 @@ public class Pasta extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // 아이템 추가
-        addItem(R.drawable.gamberoni, "감베로니","양식");
+        addItem(R.drawable.gamberoni, "감베로니","양식","","");
         // 두 번째 아이템 추가.
-        addItem(R.drawable.pasta2, "새우 베이컨 파스타","양식");
+        addItem(R.drawable.pasta2, "새우 베이컨 파스타","양식","","");
         // 세 번째 아이템 추가.
-        addItem(R.drawable.pasta3, "토마토 파스타","양식");
+        addItem(R.drawable.pasta3, "토마토 파스타","양식","","");
 
         mAdapter.notifyDataSetChanged() ;
 
@@ -48,13 +48,9 @@ public class Pasta extends AppCompatActivity {
             }
         });
     }
-    public void addItem(int recipe_image, String recipe_title, String recipe_food) {
-        MyRecipeData item = new MyRecipeData(recipe_image,recipe_title,recipe_food);
-
-        item.setRecipe_image(recipe_image);
-        item.setRecipe_name(recipe_title);
-        item.setRecipe_food(recipe_food);
-
+    public void addItem(int recipe_image, String recipe_title, String recipe_food, String recipe_need, String recipe_context) {
+        MyRecipeData item = new MyRecipeData(recipe_image,recipe_title,recipe_food,recipe_need, recipe_context);
         mList.add(item);
+        System.out.println("%%%%");
     }
 }

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">MyEveryRecipe</string>
+    <string-array name="food_array">
+        <item>한식</item>
+        <item>양식</item>
+        <item>간식</item>
+        <item>기타</item>
+    </string-array>
+
 </resources>

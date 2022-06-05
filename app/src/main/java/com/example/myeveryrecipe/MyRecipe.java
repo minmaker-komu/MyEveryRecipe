@@ -1,5 +1,6 @@
 package com.example.myeveryrecipe;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -75,8 +76,8 @@ public class MyRecipe extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),Writing.class);
-                startActivity(intent);
+                Intent intent = new Intent(MyRecipe.this,Writing.class);
+                startActivityForResult(intent,7);
             }
         });
 
@@ -94,18 +95,78 @@ public class MyRecipe extends AppCompatActivity {
         System.out.println("$$$$");
 
         // 아이템 추가.
-        addItem(R.drawable.gamberoni,"감베로니","양식");
+        addItem(R.drawable.gamberoni,"감베로니","양식","","");
         System.out.println("&&");
         // 두 번째 아이템 추가.
-        addItem(R.drawable.susi, "연어초밥","기타");
+        addItem(R.drawable.susi, "연어초밥","기타","","");
         // 세 번째 아이템 추가.
-        addItem(R.drawable.oilpasta, "삼겹살 파스타","양식");
+        addItem(R.drawable.oilpasta, "삼겹살 파스타","양식","","");
         adapter.notifyDataSetChanged();
     }
 
-    public void addItem(int recipe_image, String recipe_title, String recipe_food) {
-        MyRecipeData item = new MyRecipeData(recipe_image,recipe_title,recipe_food);
+    public void addItem(int recipe_image, String recipe_title, String recipe_food, String recipe_need, String recipe_context) {
+        MyRecipeData item = new MyRecipeData(recipe_image,recipe_title,recipe_food,recipe_need, recipe_context);
         mList.add(item);
         System.out.println("%%%%");
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        System.out.println(resultCode);
+        if(resultCode == RESULT_OK){
+            System.out.println("@@@@@");
+
+            String title = data.getStringExtra("name");
+            String food = data.getStringExtra("food");
+            String recipe = data.getStringExtra("recipe");
+            String need = data.getStringExtra("need");
+            mList.add(new MyRecipeData(R.drawable.susi,title,food,recipe,need));
+            System.out.println("%%%%"+title);
+            adapter.notifyDataSetChanged();
+            //mAdapter.notifyItemChanged();
+            //image = getIntent().getIntExtra("image",0);
+        }
+
+        else if (resultCode == 609){
+            System.out.println(resultCode);
+            String title = data.getStringExtra("name_update");
+            System.out.println(title);
+            mList.get(adapter.getItemCount()-1).setRecipe_name(title);
+            //mAdapter.notifyItemChanged(mAdapter.getItemCount()-1,title);
+            adapter.notifyDataSetChanged();
+
+
+        }
+
+
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        int action = 0;
+        //if (getIntent().getBooleanExtra("new", false)) action = 1;
+        if (getIntent().getBooleanExtra("edit", false)) action = 2;
+        if (action > 0) {
+            System.out.println("^^^^^");
+
+            String name_update = getIntent().getStringExtra("name_update");
+            String need_update = getIntent().getStringExtra("need_update");
+            String context_update = getIntent().getStringExtra("context_update");
+            System.out.println(name_update);
+            int position = getIntent().getIntExtra("position", -1);
+            System.out.println(position);
+            System.out.println("%%%");
+
+            if (position != -1) {
+                System.out.println("####");
+                mList.get(position).setRecipe_name(name_update);
+                mList.get(position).setRecipe_need(need_update);
+                mList.get(position).setRecipe_context(context_update);
+            }
+            adapter.notifyDataSetChanged();
+
+        }
+
     }
 }
