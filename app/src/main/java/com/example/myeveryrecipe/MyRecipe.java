@@ -6,11 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -23,6 +25,9 @@ public class MyRecipe extends AppCompatActivity {
     ImageView mypage;
 
     FloatingActionButton btn;
+    Gson gson;
+    private SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     MyRecipeAdapter adapter;
     ArrayList<MyRecipeData> mList = new ArrayList<MyRecipeData>();
@@ -102,6 +107,9 @@ public class MyRecipe extends AppCompatActivity {
         // 세 번째 아이템 추가.
         addItem(R.drawable.oilpasta, "삼겹살 파스타","양식","","");
         adapter.notifyDataSetChanged();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("Recipe", MODE_PRIVATE);
+        String name = sharedPreferences.getString("name","");
     }
 
     public void addItem(int recipe_image, String recipe_title, String recipe_food, String recipe_need, String recipe_context) {
@@ -167,6 +175,14 @@ public class MyRecipe extends AppCompatActivity {
             adapter.notifyDataSetChanged();
 
         }
+
+    }
+
+    public void saveData(){
+        sharedPreferences = getSharedPreferences("myrecipe",MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        gson = new Gson();
+
 
     }
 }

@@ -133,6 +133,8 @@ public class ReadMaterial extends AppCompatActivity {
                 editor.putString("material_date",date_update);
                 editor.putString("material_date2",date2_update);
                 editor.apply();*/
+
+
                 Intent intent = new Intent(getApplicationContext(),Refrigerator.class);
                 intent.putExtra("edit", true);
                 intent.putExtra("name_update",name_update);

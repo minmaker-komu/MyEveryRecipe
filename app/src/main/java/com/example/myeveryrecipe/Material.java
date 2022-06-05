@@ -64,6 +64,16 @@ public class Material extends AppCompatActivity {
                 material_name = name.getText().toString();
                 material_date2 = date2.getText().toString();
                 material_date = date.getText().toString();
+                if (name.length() > 0) {
+                    Intent intent = new Intent(getApplicationContext(),Refrigerator.class);
+                    intent.putExtra("mname", material_name);
+                    intent.putExtra("date",material_date);
+                    intent.putExtra("date2",material_date2);
+                    setResult(800,intent);
+                    System.out.println("2222222");
+                    Toast.makeText(Material.this, "재료 등록을 완료했습니다.", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("material_name",material_name);
                 editor.putString("material_date",material_date);
@@ -91,7 +101,7 @@ public class Material extends AppCompatActivity {
                             new DatePickerDialog.OnDateSetListener() {
                                 @Override
                                 public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                                    date.setText(year + "/" + (month+1) + "/" + dayOfMonth);
+                                    date.setText(year + "." + (month+1) + "." + dayOfMonth);
                                 }
 
                             }, mYear,mMonth,mDay);
@@ -116,7 +126,7 @@ public class Material extends AppCompatActivity {
                             new DatePickerDialog.OnDateSetListener() {
                                 @Override
                                 public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                                    date2.setText(year + "/" + (month+1) + "/" + dayOfMonth);
+                                    date2.setText(year + "." + (month+1) + "." + dayOfMonth);
                                 }
 
                             }, mYear,mMonth,mDay);

@@ -3,6 +3,7 @@ package com.example.myeveryrecipe;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -24,12 +25,18 @@ public class Writing extends AppCompatActivity {
     private final int GET_GALLERY_IMAGE = 200;
     ImageView recipeImg;
 
+    private SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
     EditText editTitle, editFood, editRecipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_writing);
+
+        sharedPreferences = getSharedPreferences("Recipe", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         // 스피너 선언
         spinner = findViewById(R.id.spinner);
@@ -94,6 +101,7 @@ public class Writing extends AppCompatActivity {
                     Toast.makeText(Writing.this, "레시피 등록이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                     finish();
                 }
+                saveData();
 
             }
         });
@@ -119,5 +127,18 @@ public class Writing extends AppCompatActivity {
             Uri selectedImageUri = data.getData();
             recipeImg.setImageURI(selectedImageUri);
         }
+    }
+
+    public void saveData() {
+        String title = editTitle.getText().toString();
+        String need = editFood.getText().toString();
+        String recipe = editRecipe.getText().toString();
+        String food = spinner.getSelectedItem().toString();
+
+        editor.putString("name",title);
+        editor.putString("need",need);
+        editor.putString("recipe",recipe);
+        editor.putString("food",food);
+        editor.apply();
     }
 }

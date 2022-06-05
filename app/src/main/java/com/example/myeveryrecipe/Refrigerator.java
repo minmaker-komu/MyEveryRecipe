@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -52,7 +53,7 @@ public class Refrigerator extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),Material.class);
-                startActivity(intent);
+                startActivityForResult(intent,99);
             }
         });
 
@@ -179,5 +180,22 @@ public class Refrigerator extends AppCompatActivity {
 
         }
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        System.out.println(resultCode);
+        if(resultCode == 800){
+            System.out.println("@@@@@");
+            String name = data.getStringExtra("mname");
+            String date = data.getStringExtra("date");
+            String date2 = data.getStringExtra("date2");
+
+            materialData.add(new MaterialData(R.drawable.material_pic,name,date,date2,"1"));
+            materialAdapter.notifyDataSetChanged();
+            //mAdapter.notifyItemChanged();
+            //image = getIntent().getIntExtra("image",0);
+        }
     }
 }
