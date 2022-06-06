@@ -37,6 +37,7 @@ public class MyPage extends AppCompatActivity {
     private String name;
 
     TextView nickname;
+    TextView id_show;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +60,12 @@ public class MyPage extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("UserInfo", MODE_PRIVATE);
         String name = sharedPreferences.getString("name","");
+        String id = sharedPreferences.getString("id","");
         nickname = findViewById(R.id.nickname);
+        id_show = findViewById(R.id.id_show);
         nickname.setText(name);
+        id_show.setText(id);
+
 
         // 정의
         cook = findViewById(R.id.menu_cook);

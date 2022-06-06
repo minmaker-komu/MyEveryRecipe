@@ -45,6 +45,7 @@
             android:layout_marginTop="10dp"
             app:layout_constraintTop_toTopOf="parent"/>
         <TextView
+            android:id="@+id/id_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="한 줄 소개"

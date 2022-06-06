@@ -31,10 +31,7 @@ public class Korean extends AppCompatActivity {
 
         // 아이템 추가
         addItem(R.drawable.korean1, "낙지볶음","한식","","");
-        // 두 번째 아이템 추가.
-        //addItem(R.drawable.susi, "연어초밥","한식");
-        // 세 번째 아이템 추가.
-        //ㅇㅁㄴaddItem(R.drawable.oilpasta, "삼겹살 파스타","한식");
+
 
         mAdapter.notifyDataSetChanged() ;
 
@@ -57,9 +54,6 @@ public class Korean extends AppCompatActivity {
 
         mList.add(item);
     }
-    /*public void addItem(int recipe_image, String recipe_title, String recipe_food, String recipe_need, String recipe_context) {
-        MyRecipeData item = new MyRecipeData(recipe_image,recipe_title,recipe_food,recipe_need, recipe_context);
-        mList.add(item);
-        System.out.println("%%%%");
-    }*/
+
+
 }

@@ -60,7 +60,6 @@ public class Material extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // 객체 전달
-                sharedPreferences = getSharedPreferences("MaterialInfo",MODE_PRIVATE);
                 material_name = name.getText().toString();
                 material_date2 = date2.getText().toString();
                 material_date = date.getText().toString();
@@ -74,11 +73,7 @@ public class Material extends AppCompatActivity {
                     Toast.makeText(Material.this, "재료 등록을 완료했습니다.", Toast.LENGTH_SHORT).show();
                     finish();
                 }
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("material_name",material_name);
-                editor.putString("material_date",material_date);
-                editor.putString("material_date2",material_date2);
-                editor.commit();
+
                 Toast.makeText(Material.this, "재료 등록을 완료했습니다.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(),Refrigerator.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);

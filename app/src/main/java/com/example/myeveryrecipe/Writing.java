@@ -92,16 +92,23 @@ public class Writing extends AppCompatActivity {
                 if (title.length() > 0 && need.length() > 0) {
                     Intent intent = new Intent(Writing.this, MyRecipe.class);
                     intent.putExtra("name", title);
-                    intent.putExtra("need",need);
-                    intent.putExtra("recipe",recipe);
-                    intent.putExtra("food",food);
+                    intent.putExtra("need", need);
+                    intent.putExtra("recipe", recipe);
+                    intent.putExtra("food", food);
                     System.out.println(title);
-                    setResult(RESULT_OK,intent);
+                    setResult(RESULT_OK, intent);
                     System.out.println("2222222");
                     Toast.makeText(Writing.this, "레시피 등록이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                     finish();
                 }
-                saveData();
+
+                switch (food){
+                    case "한식":
+                        // 한식이면 한식 액티비티에도 리사이클러뷰 추가하기
+                        break;
+                }
+
+
 
             }
         });
@@ -129,16 +136,4 @@ public class Writing extends AppCompatActivity {
         }
     }
 
-    public void saveData() {
-        String title = editTitle.getText().toString();
-        String need = editFood.getText().toString();
-        String recipe = editRecipe.getText().toString();
-        String food = spinner.getSelectedItem().toString();
-
-        editor.putString("name",title);
-        editor.putString("need",need);
-        editor.putString("recipe",recipe);
-        editor.putString("food",food);
-        editor.apply();
-    }
 }

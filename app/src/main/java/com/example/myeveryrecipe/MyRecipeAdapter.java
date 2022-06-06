@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,12 +19,21 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class MyRecipeAdapter extends RecyclerView.Adapter<MyRecipeAdapter.ItemViewHolder>{
 
+    Gson gson;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
     private ArrayList<MyRecipeData> mData;
-    private Context mContext;
+    Context mContext;
+    MyRecipe myRecipe;
     MyRecipeAdapter(ArrayList<MyRecipeData> list) {
 
         mData = list ;
@@ -55,12 +65,13 @@ public class MyRecipeAdapter extends RecyclerView.Adapter<MyRecipeAdapter.ItemVi
 
     // RecyclerView의 핵심인 ViewHolder 입니다.
     // 여기서 subView를 setting 해줍니다.
-    public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
+    public class ItemViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView recipe_image ;
         private TextView recipe_name ;
         private TextView recipe_food ;
         private ImageView select_btn;
+
 
 
 
@@ -105,7 +116,6 @@ public class MyRecipeAdapter extends RecyclerView.Adapter<MyRecipeAdapter.ItemVi
                     return false;
                 }
             });
-            //itemView.setOnCreateContextMenuListener(MyRecipeAdapter.ItemViewHolder.this);
 
 
             // 뷰 객체에 대한 참조. (hold strong reference)
@@ -114,50 +124,8 @@ public class MyRecipeAdapter extends RecyclerView.Adapter<MyRecipeAdapter.ItemVi
             recipe_food = itemView.findViewById(R.id.food_name) ;
             select_btn = itemView.findViewById(R.id.select_btn);
 
-            select_btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    System.out.println("%%%1212");
-                }
-            });
-
         }
 
-        //context 메뉴
-
-        @Override
-        public void onCreateContextMenu(@NonNull ContextMenu menu,
-                                        View v,
-                                        ContextMenu.ContextMenuInfo menuInfo)
-        {
-            MenuItem Edit = menu.add(Menu.NONE,1001,1,"편집");
-            MenuItem Delete = menu.add(Menu.NONE,1002,2,"삭제");
-            if(v==select_btn){
-                Edit.setOnMenuItemClickListener(onEditMenu);
-                Delete.setOnMenuItemClickListener(onEditMenu);
-            }
-
-
-        }
-        private final MenuItem.OnMenuItemClickListener onEditMenu = new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-
-                switch (menuItem.getItemId()){
-                    // 나의 레시피 수정
-                    case 1:
-                        System.out.println("11111111111");
-                        break;
-                    case 2:
-                        mData.remove(getAdapterPosition());
-                        System.out.println("^^DDD^^^");
-                        notifyDataSetChanged();
-                        break;
-                }
-                return false;
-            }
-        };
 
         void onBind(MyRecipeData data) {
 
@@ -166,5 +134,31 @@ public class MyRecipeAdapter extends RecyclerView.Adapter<MyRecipeAdapter.ItemVi
             recipe_food.setText(data.getRecipe_food());
         }
     }
+
+    /*public void saveData(ArrayList<MyRecipeData> mList){
+        sharedPreferences = mContext.getSharedPreferences("myrecipe",mContext.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        gson = new Gson();
+        String json = gson.toJson(mList);
+
+        editor.putString("recipe_list",json);
+        editor.apply();
+
+    }
+
+    public ArrayList<MyRecipeData> readData(){
+
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences("myrecipe",mContext.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("recipe_list","");
+        Type type = new TypeToken<ArrayList<MyRecipeData>>(){
+        }.getType();
+        mData = gson.fromJson(json,type);
+        //return mData;
+        if(mData == null){
+            mData = new ArrayList<>();
+        }
+        return mData;
+    }*/
 
 }

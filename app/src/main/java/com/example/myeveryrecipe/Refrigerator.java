@@ -5,6 +5,7 @@ package com.example.myeveryrecipe;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,7 +18,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,10 +40,16 @@ public class Refrigerator extends AppCompatActivity {
 
     ArrayList<MaterialData> materialData;
 
+    Gson gson;
+    private SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_refrigerator);
+
+        sharedPreferences = getSharedPreferences("my_material",MODE_PRIVATE);
 
 
         // 정의
@@ -95,11 +105,16 @@ public class Refrigerator extends AppCompatActivity {
         date.setText(getTime());
 
         // 초기에 보여질 재료들
-        this.InitializeMaterialData();
+        materialData = new ArrayList<MaterialData>();
+
+        materialData.add(new MaterialData(R.drawable.bread, "빵","22.05.06","23.09.11","2"));
+
+        readData();
 
         // 리스트뷰 보이게
         ListView listView = (ListView)findViewById(R.id.listview);
         materialAdapter = new MaterialAdapter(this,materialData);
+
         listView.setAdapter(materialAdapter);
 
         // 재료 확인하기
@@ -197,5 +212,38 @@ public class Refrigerator extends AppCompatActivity {
             //mAdapter.notifyItemChanged();
             //image = getIntent().getIntExtra("image",0);
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        System.out.println("****stop 되었습니다****");
+        saveData(materialData);
+    }
+
+    public void saveData(ArrayList<MaterialData> mList){
+        sharedPreferences = getSharedPreferences("my_material",MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        gson = new Gson();
+        String json = gson.toJson(mList);
+
+        editor.putString("material_list",json);
+        editor.apply();
+
+    }
+
+    public ArrayList<MaterialData> readData(){
+
+        SharedPreferences sharedPreferences = getSharedPreferences("my_material",MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("material_list","");
+        Type type = new TypeToken<ArrayList<MaterialData>>(){
+        }.getType();
+        materialData = gson.fromJson(json,type);
+
+        if(materialData == null){
+            materialData = new ArrayList<>();
+        }
+        return materialData;
     }
 }

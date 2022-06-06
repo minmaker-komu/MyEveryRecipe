@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,7 +14,9 @@ import android.widget.ImageView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class MyRecipe extends AppCompatActivity {
@@ -23,6 +26,7 @@ public class MyRecipe extends AppCompatActivity {
     ImageView refri;
     ImageView recipe;
     ImageView mypage;
+    public static Context context;
 
     FloatingActionButton btn;
     Gson gson;
@@ -36,6 +40,11 @@ public class MyRecipe extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_recipe);
+
+        sharedPreferences = getSharedPreferences("myrecipe",MODE_PRIVATE);
+
+        //context = getApplicationContext();
+        System.out.println("****create 되었습니다****");
 
         // 정의
         cook = findViewById(R.id.menu_cook);
@@ -95,9 +104,7 @@ public class MyRecipe extends AppCompatActivity {
 
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        adapter = new MyRecipeAdapter(mList);
-        recyclerView.setAdapter(adapter);
-        System.out.println("$$$$");
+
 
         // 아이템 추가.
         addItem(R.drawable.gamberoni,"감베로니","양식","","");
@@ -106,10 +113,12 @@ public class MyRecipe extends AppCompatActivity {
         addItem(R.drawable.susi, "연어초밥","기타","","");
         // 세 번째 아이템 추가.
         addItem(R.drawable.oilpasta, "삼겹살 파스타","양식","","");
-        adapter.notifyDataSetChanged();
 
-        SharedPreferences sharedPreferences = getSharedPreferences("Recipe", MODE_PRIVATE);
-        String name = sharedPreferences.getString("name","");
+        readData();
+        adapter = new MyRecipeAdapter(mList);
+        recyclerView.setAdapter(adapter);
+        System.out.println("$$$$");
+        adapter.notifyDataSetChanged();
     }
 
     public void addItem(int recipe_image, String recipe_title, String recipe_food, String recipe_need, String recipe_context) {
@@ -132,6 +141,7 @@ public class MyRecipe extends AppCompatActivity {
             mList.add(new MyRecipeData(R.drawable.susi,title,food,recipe,need));
             System.out.println("%%%%"+title);
             adapter.notifyDataSetChanged();
+            System.out.println("추가완료******ㅇㅁㄴ");
             //mAdapter.notifyItemChanged();
             //image = getIntent().getIntExtra("image",0);
         }
@@ -155,6 +165,7 @@ public class MyRecipe extends AppCompatActivity {
         int action = 0;
         //if (getIntent().getBooleanExtra("new", false)) action = 1;
         if (getIntent().getBooleanExtra("edit", false)) action = 2;
+        // 수정
         if (action > 0) {
             System.out.println("^^^^^");
 
@@ -178,11 +189,38 @@ public class MyRecipe extends AppCompatActivity {
 
     }
 
-    public void saveData(){
+    @Override
+    protected void onStop() {
+        super.onStop();
+        System.out.println("****stop 되었습니다****");
+        saveData(mList);
+    }
+
+    public void saveData(ArrayList<MyRecipeData> mList){
         sharedPreferences = getSharedPreferences("myrecipe",MODE_PRIVATE);
         editor = sharedPreferences.edit();
         gson = new Gson();
+        String json = gson.toJson(mList);
 
+        editor.putString("recipe_list",json);
+        editor.apply();
 
+    }
+
+    public ArrayList<MyRecipeData> readData(){
+
+        SharedPreferences sharedPreferences = getSharedPreferences("myrecipe",MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("recipe_list","");
+        Type type = new TypeToken<ArrayList<MyRecipeData>>(){
+        }.getType();
+        mList = gson.fromJson(json,type);
+        //adapter = new MyRecipeAdapter(mList);
+
+        //return mData;
+        if(mList == null){
+            mList = new ArrayList<>();
+        }
+        return mList;
     }
 }
