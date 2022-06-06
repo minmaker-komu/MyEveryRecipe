@@ -111,7 +111,7 @@ public class RecyclerRecipeAdapter extends RecyclerView.Adapter<RecyclerRecipeAd
                             })
                             .setNeutralButton("취소", null)
                             .show();
-                    return false;
+                    return true;
                 }
             });
 

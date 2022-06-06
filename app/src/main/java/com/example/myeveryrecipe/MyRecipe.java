@@ -41,7 +41,7 @@ public class MyRecipe extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_recipe);
 
-        sharedPreferences = getSharedPreferences("myrecipe",MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("myrecipe", MODE_PRIVATE);
 
         //context = getApplicationContext();
         System.out.println("****create 되었습니다****");
@@ -56,7 +56,7 @@ public class MyRecipe extends AppCompatActivity {
         cook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -64,7 +64,7 @@ public class MyRecipe extends AppCompatActivity {
         refri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),Refrigerator.class);
+                Intent intent = new Intent(getApplicationContext(), Refrigerator.class);
                 startActivity(intent);
             }
         });
@@ -72,7 +72,7 @@ public class MyRecipe extends AppCompatActivity {
         recipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),MyRecipe.class);
+                Intent intent = new Intent(getApplicationContext(), MyRecipe.class);
                 startActivity(intent);
             }
         });
@@ -80,7 +80,7 @@ public class MyRecipe extends AppCompatActivity {
         mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),MyPage.class);
+                Intent intent = new Intent(getApplicationContext(), MyPage.class);
                 //intent.putExtra("name",name);
                 startActivity(intent);
             }
@@ -90,8 +90,8 @@ public class MyRecipe extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MyRecipe.this,Writing.class);
-                startActivityForResult(intent,7);
+                Intent intent = new Intent(MyRecipe.this, Writing.class);
+                startActivityForResult(intent, 7);
             }
         });
 
@@ -105,14 +105,13 @@ public class MyRecipe extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
 
 
-
         // 아이템 추가.
-        addItem(R.drawable.gamberoni,"감베로니","양식","","");
+        addItem(R.drawable.gamberoni, "감베로니", "양식", "", "");
         System.out.println("&&");
         // 두 번째 아이템 추가.
-        addItem(R.drawable.susi, "연어초밥","기타","","");
+        addItem(R.drawable.susi, "연어초밥", "기타", "", "");
         // 세 번째 아이템 추가.
-        addItem(R.drawable.oilpasta, "삼겹살 파스타","양식","","");
+        addItem(R.drawable.oilpasta, "삼겹살 파스타", "양식", "", "");
 
         readData();
         adapter = new MyRecipeAdapter(mList);
@@ -122,7 +121,7 @@ public class MyRecipe extends AppCompatActivity {
     }
 
     public void addItem(int recipe_image, String recipe_title, String recipe_food, String recipe_need, String recipe_context) {
-        MyRecipeData item = new MyRecipeData(recipe_image,recipe_title,recipe_food,recipe_need, recipe_context);
+        MyRecipeData item = new MyRecipeData(recipe_image, recipe_title, recipe_food, recipe_need, recipe_context);
         mList.add(item);
         System.out.println("%%%%");
     }
@@ -131,26 +130,37 @@ public class MyRecipe extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         System.out.println(resultCode);
-        if(resultCode == RESULT_OK){
+        if (resultCode == RESULT_OK) {
             System.out.println("@@@@@");
 
             String title = data.getStringExtra("name");
             String food = data.getStringExtra("food");
             String recipe = data.getStringExtra("recipe");
             String need = data.getStringExtra("need");
-            mList.add(new MyRecipeData(R.drawable.susi,title,food,recipe,need));
-            System.out.println("%%%%"+title);
+            mList.add(new MyRecipeData(R.drawable.susi, title, food, recipe, need));
+            System.out.println("%%%%" + title);
             adapter.notifyDataSetChanged();
             System.out.println("추가완료******ㅇㅁㄴ");
             //mAdapter.notifyItemChanged();
             //image = getIntent().getIntExtra("image",0);
-        }
+            /*switch (food) {
+                case "한식":
+                    // 한식이면 한식 액티비티에도 리사이클러뷰 추가하기
+                    System.out.println("한식입니다ㅇㄴ");
+                    Intent intent = new Intent(this, Korean.class);
+                    intent.putExtra("name", title);
+                    intent.putExtra("need", need);
+                    intent.putExtra("recipe", recipe);
+                    setResult(427, intent);
+                    //finish();
+                    break;
+            }*/
 
-        else if (resultCode == 609){
+        } else if (resultCode == 609) {
             System.out.println(resultCode);
             String title = data.getStringExtra("name_update");
             System.out.println(title);
-            mList.get(adapter.getItemCount()-1).setRecipe_name(title);
+            mList.get(adapter.getItemCount() - 1).setRecipe_name(title);
             //mAdapter.notifyItemChanged(mAdapter.getItemCount()-1,title);
             adapter.notifyDataSetChanged();
 
@@ -159,6 +169,7 @@ public class MyRecipe extends AppCompatActivity {
 
 
     }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -196,29 +207,29 @@ public class MyRecipe extends AppCompatActivity {
         saveData(mList);
     }
 
-    public void saveData(ArrayList<MyRecipeData> mList){
-        sharedPreferences = getSharedPreferences("myrecipe",MODE_PRIVATE);
+    public void saveData(ArrayList<MyRecipeData> mList) {
+        sharedPreferences = getSharedPreferences("myrecipe", MODE_PRIVATE);
         editor = sharedPreferences.edit();
         gson = new Gson();
         String json = gson.toJson(mList);
 
-        editor.putString("recipe_list",json);
+        editor.putString("recipe_list", json);
         editor.apply();
 
     }
 
-    public ArrayList<MyRecipeData> readData(){
+    public ArrayList<MyRecipeData> readData() {
 
-        SharedPreferences sharedPreferences = getSharedPreferences("myrecipe",MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("myrecipe", MODE_PRIVATE);
         Gson gson = new Gson();
-        String json = sharedPreferences.getString("recipe_list","");
-        Type type = new TypeToken<ArrayList<MyRecipeData>>(){
+        String json = sharedPreferences.getString("recipe_list", "");
+        Type type = new TypeToken<ArrayList<MyRecipeData>>() {
         }.getType();
-        mList = gson.fromJson(json,type);
+        mList = gson.fromJson(json, type);
         //adapter = new MyRecipeAdapter(mList);
 
         //return mData;
-        if(mList == null){
+        if (mList == null) {
             mList = new ArrayList<>();
         }
         return mList;

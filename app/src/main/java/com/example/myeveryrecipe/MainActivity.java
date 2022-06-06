@@ -97,7 +97,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),Korean.class);
-                startActivity(intent);
+                startActivityForResult(intent, 428);
+                //startActivity(intent);
             }
         });
         // 양식 버튼 눌렀을 때

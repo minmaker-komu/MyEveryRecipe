@@ -87,8 +87,7 @@ public class Writing extends AppCompatActivity {
                 String food = spinner.getSelectedItem().toString();
 
                 //int img = recipeImg.
-
-
+                
                 if (title.length() > 0 && need.length() > 0) {
                     Intent intent = new Intent(Writing.this, MyRecipe.class);
                     intent.putExtra("name", title);
@@ -102,11 +101,18 @@ public class Writing extends AppCompatActivity {
                     finish();
                 }
 
-                switch (food){
+                /*switch (food){
                     case "한식":
                         // 한식이면 한식 액티비티에도 리사이클러뷰 추가하기
+                        System.out.println("한식입니다ㅇㄴ");
+                        Intent intent = new Intent(Writing.this, Korean.class);
+                        intent.putExtra("name", title);
+                        intent.putExtra("need", need);
+                        intent.putExtra("recipe", recipe);
+                        setResult(427,intent);
+                        //finish();
                         break;
-                }
+                }*/
 
 
 

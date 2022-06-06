@@ -151,7 +151,7 @@ public class Refrigerator extends AppCompatActivity {
                             }
                         })
                         .setNeutralButton("취소", null).show();
-                return false;
+                return true;
             }
         });
     }
