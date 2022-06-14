@@ -128,10 +128,9 @@ public class Refrigerator extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                //materialAdapter.getItem(position).getMaterial_name();
-                int itemPosition = listView.getCheckedItemPosition();
 
-                MaterialData material = materialData.get(itemPosition+1);
+                MaterialData material = materialData.get(position);
+
                 Intent intent = new Intent(getApplicationContext(), ReadMaterial.class);
                 intent.putExtra("material_name", material.getMaterial_name());
                 intent.putExtra("material_date", material.getMaterial_date());
@@ -243,7 +242,7 @@ public class Refrigerator extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        Toast.makeText(this, "onStop()", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "onStop()", Toast.LENGTH_SHORT).show();
     }
 
     public void saveData(ArrayList<MaterialData> mList){
@@ -293,7 +292,6 @@ public class Refrigerator extends AppCompatActivity {
 
     public void handleMessage(Message msg){
         date.setText(getTime());
-        //date.setText(DateFormat.getDateInstance().format(new Date()));
     }
 
     public class BackgroundThread extends Thread{

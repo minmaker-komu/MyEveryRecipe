@@ -121,6 +121,9 @@ public class Material extends AppCompatActivity {
                             new DatePickerDialog.OnDateSetListener() {
                                 @Override
                                 public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+                                    int year1 = year;
+                                    int month1 = month;
+                                    int dayOfMonth1 = dayOfMonth;
                                     date2.setText(year + "." + (month+1) + "." + dayOfMonth);
                                 }
 
