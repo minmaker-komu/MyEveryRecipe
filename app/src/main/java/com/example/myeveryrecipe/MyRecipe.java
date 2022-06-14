@@ -137,7 +137,7 @@ public class MyRecipe extends AppCompatActivity {
             String food = data.getStringExtra("food");
             String recipe = data.getStringExtra("recipe");
             String need = data.getStringExtra("need");
-            mList.add(new MyRecipeData(R.drawable.susi, title, food, recipe, need));
+            mList.add(new MyRecipeData(R.drawable.material_pic, title, food, recipe, need));
             System.out.println("%%%%" + title);
             adapter.notifyDataSetChanged();
             System.out.println("추가완료******ㅇㅁㄴ");

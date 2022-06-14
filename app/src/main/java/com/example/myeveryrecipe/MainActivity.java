@@ -13,6 +13,9 @@ public class MainActivity extends AppCompatActivity {
     final String TAG = this.getClass().getSimpleName();
     private String name;
 
+    // 계란 이미지
+    ImageView EGG;
+
     // 메뉴 선택 이미지
     ImageView cook;
     ImageView refri;
@@ -42,6 +45,15 @@ public class MainActivity extends AppCompatActivity {
         refri = findViewById(R.id.menu_refri);
         recipe = findViewById(R.id.menu_writing);
         mypage = findViewById(R.id.menu_profile);
+        EGG = findViewById(R.id.logo);
+
+        EGG.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),EggTimer.class);
+                startActivity(intent);
+            }
+        });
 
         // 홈
         cook.setOnClickListener(new View.OnClickListener() {

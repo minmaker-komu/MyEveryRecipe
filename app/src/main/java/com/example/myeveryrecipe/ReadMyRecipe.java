@@ -66,16 +66,6 @@ public class ReadMyRecipe extends AppCompatActivity {
                 startActivity(intent);
                 finish();
 
-                /*Intent intent = new Intent();
-                System.out.println("7777777");
-                intent.putExtra("name_update",name_update);
-                intent.putExtra("need_update",need_update);
-                intent.putExtra("context_update",context_update);
-                setResult(609,intent);
-                System.out.println("@2222224444");
-                finish();*/
-
-
             }
         });
 

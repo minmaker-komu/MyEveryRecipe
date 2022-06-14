@@ -7,11 +7,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -21,7 +24,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.ref.WeakReference;
 import java.lang.reflect.Type;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,6 +44,8 @@ public class Refrigerator extends AppCompatActivity {
     FloatingActionButton material_add;
 
     ArrayList<MaterialData> materialData;
+
+    BackgroundThread backgroundThread;
 
     Gson gson;
     private SharedPreferences sharedPreferences;
@@ -102,7 +109,7 @@ public class Refrigerator extends AppCompatActivity {
 
         // 현재 날짜
         date = findViewById(R.id.textDate);
-        date.setText(getTime());
+        //date.setText(getTime());
 
         // 초기에 보여질 재료들
         materialData = new ArrayList<MaterialData>();
@@ -165,7 +172,7 @@ public class Refrigerator extends AppCompatActivity {
 
     private String getTime() { long now = System.currentTimeMillis();
         Date date = new Date(now);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String getTime = dateFormat.format(date); return getTime;
     }
 
@@ -195,6 +202,11 @@ public class Refrigerator extends AppCompatActivity {
 
         }
 
+        backgroundThread = new BackgroundThread();
+        backgroundThread.setRunning(true);
+        backgroundThread.start();
+
+
     }
 
     @Override
@@ -219,6 +231,19 @@ public class Refrigerator extends AppCompatActivity {
         super.onStop();
         System.out.println("****stop 되었습니다****");
         saveData(materialData);
+
+        boolean retry = true;
+        backgroundThread.setRunning(false);
+
+        while(retry){
+            try{
+                backgroundThread.join();
+                retry = false;
+            } catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        }
+        Toast.makeText(this, "onStop()", Toast.LENGTH_SHORT).show();
     }
 
     public void saveData(ArrayList<MaterialData> mList){
@@ -245,5 +270,48 @@ public class Refrigerator extends AppCompatActivity {
             materialData = new ArrayList<>();
         }
         return materialData;
+    }
+
+    private final MyHandler myHandler = new MyHandler(this);
+
+
+    private static class MyHandler extends Handler {
+        private final WeakReference<Refrigerator> mActivity;
+        public MyHandler(Refrigerator activity) {
+            mActivity = new WeakReference<Refrigerator>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg){
+            Refrigerator activity = mActivity.get();
+            if (activity != null){
+
+                activity.handleMessage(msg);
+            }
+        }
+    }
+
+    public void handleMessage(Message msg){
+        date.setText(getTime());
+        //date.setText(DateFormat.getDateInstance().format(new Date()));
+    }
+
+    public class BackgroundThread extends Thread{
+        boolean running = false;
+        void setRunning(boolean b) {
+            running = b;
+        }
+
+        @Override
+        public void run(){
+            while (running){
+                try {
+                    sleep(1000);
+                } catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+                myHandler.sendMessage(myHandler.obtainMessage());
+            }
+        }
     }
 }

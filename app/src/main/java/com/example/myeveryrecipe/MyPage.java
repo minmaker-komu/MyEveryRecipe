@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,6 +24,7 @@ public class MyPage extends AppCompatActivity {
     ImageView refri;
     ImageView recipe;
     ImageView mypage;
+    Handler handler = new Handler();
 
     // 스크랩한 레시피
     RecyclerView mRecyclerView = null ;
@@ -115,10 +118,39 @@ public class MyPage extends AppCompatActivity {
             }
         });
 
+
+
     }
     public void addItem(int recipe_image, String recipe_title, String recipe_food, String recipe_need, String recipe_context) {
         MyRecipeData item = new MyRecipeData(recipe_image,recipe_title,recipe_food,recipe_need, recipe_context);
         mList.add(item);
         System.out.println("%%%%");
+    }
+
+    class RecipeThread extends Thread {
+        @Override
+        public void run() {
+            while(true){
+                for(int i=0; i<2; i++) {
+                    int curIdx = i%5;
+                    //final Drawable drawable = mList.get(curIdx);
+
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+
+                        }
+                    });
+
+                    try{
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+
+        }
     }
 }
