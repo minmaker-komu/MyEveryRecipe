@@ -115,7 +115,9 @@ public class Refrigerator extends AppCompatActivity {
         materialData = new ArrayList<MaterialData>();
 
         materialData.add(new MaterialData(R.drawable.bread, "빵","22.05.06","23.09.11","2"));
-
+        materialData.add(new MaterialData(R.drawable.carrots, "당근","22.06.06","22.06.11","1"));
+        materialData.add(new MaterialData(R.drawable.cucumber, "오이","22.06.14","22.06.21","1"));
+        materialData.add(new MaterialData(R.drawable.potato, "감자","22.06.14","22.06.16","1"));
         readData();
 
         // 리스트뷰 보이게

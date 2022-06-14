@@ -104,18 +104,14 @@ public class MaterialAdapter extends BaseAdapter {
         long count1 = day-tday;
 
         if (count1 > 0){
-            int i =0;
             if(count1 <=3){
-                i=30;
-                pb.setProgress(i);
+                pb.setProgress(30);
             }
             else if(count1 <=7) {
-                i = 60;
-                pb.setProgress(i);
+                pb.setProgress(60);
             }
             else {
-                i=100;
-                pb.setProgress(i);
+                pb.setProgress(100);
             }
         } else if (count1 == 0) {
             pb.setProgress(20);
@@ -127,7 +123,7 @@ public class MaterialAdapter extends BaseAdapter {
 
 
 
-
+/*
         handler = new Handler(){
             @SuppressLint("HandlerLeak")
             @Override
@@ -136,13 +132,45 @@ public class MaterialAdapter extends BaseAdapter {
                 if(cnt<100){
                     //cnt = 20;
                     pb.incrementProgressBy(-20);
+                    System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@");
                     MaterialAdapter.this.sendMessage();
 
                 }else{
                     handler.removeCallbacksAndMessages(null);
                 }
             }
-        };
+        };*/
+
+        Handler mHandler = new Handler() ;
+
+        // 핸들러로 전달할 runnable 객체. 수신 스레드 실행.
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                pb.incrementProgressBy(-5);
+            }
+        } ;
+
+        // 새로운 스레드 실행 코드. 1초 단위로 현재 시각 표시 요청.
+        class NewRunnable implements Runnable {
+            @Override
+            public void run() {
+                while (true) {
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch (Exception e) {
+                        e.printStackTrace() ;
+                    }
+
+                    mHandler.post(runnable) ;
+                }
+            }
+        }
+
+        NewRunnable nr = new NewRunnable() ;
+        Thread t = new Thread(nr) ;
+        t.start() ;
 
         return view;
     }
@@ -152,6 +180,8 @@ public class MaterialAdapter extends BaseAdapter {
         //1초에 한번씩 Handler로 메세지를 전송
         handler.sendMessageDelayed(message,1000);
     }
+
+
 
 
     // 디데이 반환
